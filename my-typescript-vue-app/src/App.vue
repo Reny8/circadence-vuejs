@@ -1,5 +1,9 @@
 <template>
   <div class="app">
+    <navbar class="header">
+      <h1>Welcome!</h1>
+      <button>+ Add Task</button>
+    </navbar>
     <section class="todo-list">
       <TodoCard v-for="todo in todos" :key="todo.id" :todo="todo" />
     </section>
@@ -51,6 +55,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header h1{
+  font-weight: 600;
 }
 </style>

@@ -1,4 +1,14 @@
-<style scoped></style>
+<style scoped>
+.todo-card {
+  display: flex;
+  padding: 1rem;
+  border: 0.5px solid #ccc;
+  border-radius: 5px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
 <template>
   <div class="todo-card">
     <h4>{{ todo.title }}</h4>
