@@ -12,7 +12,11 @@
 <template>
   <div class="todo-card">
     <h4>{{ todo.title }}</h4>
-    <input type="checkbox" :checked="todo.finished" />
+    <input
+      type="checkbox"
+      :checked="todo.finished"
+      @change="updateTask(todo.id, { ...todo, finished: !todo.finished })"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -24,6 +28,10 @@ export default defineComponent({
   props: {
     todo: {
       type: Object as () => Todo,
+      required: true,
+    },
+    updateTask: {
+      type: Function as () => (id: number, body: Todo) => Promise<Todo>,
       required: true,
     },
   },

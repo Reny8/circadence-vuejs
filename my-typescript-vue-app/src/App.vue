@@ -6,7 +6,12 @@
     </navbar>
     <section class="todo-list">
       <h2>Daily Task</h2>
-      <TodoCard v-for="todo in todos" :key="todo.id" :todo="todo" />
+      <TodoCard
+        v-for="todo in todos"
+        :key="todo.id"
+        :todo="todo"
+        :updateTask="updateTask"
+      />
     </section>
   </div>
 </template>
@@ -36,6 +41,21 @@ export default defineComponent({
         this.todos = await response.json();
       } catch (error) {
         console.log("Error occured at App.vue for fetchTodos", error);
+      }
+    },
+
+    async updateTask(id: number, body: TodoState["todos"][0]) {
+      try {
+        const response = await fetch(`${this.server}/task`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        if (response.ok) this.fetchTodos();
+      } catch (error) {
+        console.log("Error occured at App.vue for updateTask", error);
       }
     },
   },
@@ -76,7 +96,8 @@ body {
   align-items: center;
   padding-bottom: 2rem;
 }
-h1, h2 {
+h1,
+h2 {
   font-weight: 600;
 }
 .primary-button {
