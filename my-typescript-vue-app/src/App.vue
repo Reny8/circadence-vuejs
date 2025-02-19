@@ -2,9 +2,10 @@
   <div class="app">
     <navbar class="header">
       <h1>Welcome!</h1>
-      <button>+ Add Task</button>
+      <button class="primary-button">+ Add Task</button>
     </navbar>
     <section class="todo-list">
+      <h2>Daily Task</h2>
       <TodoCard v-for="todo in todos" :key="todo.id" :todo="todo" />
     </section>
   </div>
@@ -45,6 +46,10 @@ export default defineComponent({
 </script>
 
 <style>
+:root {
+  --box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  --primary: #0f63bc;
+}
 html,
 body {
   height: 100%;
@@ -62,12 +67,25 @@ body {
   flex-direction: column;
   gap: 0.5rem;
 }
+.todo-list h2 {
+  text-align: start;
+}
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 2rem;
 }
-.header h1{
+h1, h2 {
   font-weight: 600;
+}
+.primary-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
 }
 </style>
