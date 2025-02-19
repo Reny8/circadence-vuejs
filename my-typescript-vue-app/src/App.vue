@@ -8,10 +8,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import TodoCard from "./components/todocard";
 import { TodoState } from "./types/interface";
-import env from "./env";
-export default Vue.extend({
+import TodoCard from "./components/todocard.vue";
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "App",
   components: {
     TodoCard,
@@ -19,20 +19,19 @@ export default Vue.extend({
   data(): TodoState {
     return {
       todos: [],
-      server: env.process.SERVER,
+      server:
+        process.env.SERVER ||
+        "https://ca4bb038-ee44-49a8-bcdb-2e48a341652e.mock.pstmn.io",
     };
   },
   methods: {
     async fetchTodos() {
       try {
         const response = await fetch(`${this.server}/task`);
-        console.log(response);
+        this.todos = await response.json();
       } catch (error) {
         console.log("Error occured at App.vue for fetchTodos", error);
       }
-
-      // fetch todos from the api
-      // set the todos to the data
     },
   },
   async mounted() {
@@ -45,6 +44,7 @@ export default Vue.extend({
 html,
 body {
   height: 100%;
+  background-color: white;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

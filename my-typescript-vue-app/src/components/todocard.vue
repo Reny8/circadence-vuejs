@@ -2,13 +2,14 @@
 <template>
   <div class="todo-card">
     <h4>{{ todo.title }}</h4>
-    <input type="checkbox" :checked="todo.finished"/>
+    <input type="checkbox" :checked="todo.finished" />
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import { Todo } from "../types/interface";
-export default Vue.extend({
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "TodoCard",
   props: {
     todo: {
